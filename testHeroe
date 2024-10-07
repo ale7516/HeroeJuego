@@ -1,0 +1,75 @@
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class HeroeTest {
+
+    @BeforeAll
+    public static void setUpClass() {
+        System.out.println("Inicio de las pruebas de la clase Heroe");
+    }
+
+    @AfterAll
+    public static void tearDownClass() {
+        System.out.println("Fin de las pruebas de la clase Heroe");
+    }
+
+    @BeforeEach
+    public void setUp() {
+        System.out.println("Iniciando una prueba");
+    }
+
+    @AfterEach
+    public void tearDown() {
+        System.out.println("Prueba finalizada");
+    }
+
+    @Test
+    public void testAvanzarSinObstaculo() {
+        Heroe heroe = new Heroe(0, "Mario");
+        heroe.avanzar();
+        int valorEsperado = 1;
+        int valorActual = heroe.getX();
+        assertEquals(valorEsperado, valorActual);
+    }
+
+    @Test
+    public void testAvanzarConObstaculoSinSaltar() {
+        Heroe heroe = new Heroe(9, "Mario");
+        heroe.avanzar(); 
+        int vidasEsperadas = 2;
+        int vidasActuales = heroe.getVidas();
+        assertEquals(vidasEsperadas, vidasActuales);
+    }
+
+    @Test
+    public void testAvanzarConObstaculoSaltando() {
+        Heroe heroe = new Heroe(9, "Mario");
+        heroe.saltar(); 
+        heroe.avanzar(); 
+        boolean saltandoEsperado = false;
+        boolean saltandoActual = heroe.getSaltando();
+        assertEquals(saltandoEsperado, saltandoActual);
+    }
+
+    @Test
+    public void testSaltar() {
+        Heroe heroe = new Heroe(0, "Mario");
+        heroe.saltar();
+        boolean valorEsperado = true;
+        boolean valorActual = heroe.getSaltando();
+        assertEquals(valorEsperado, valorActual);
+    }
+
+    @Test
+    public void testPerderVidaAlNoSaltar() {
+        Heroe heroe = new Heroe(9, "Mario");
+        heroe.avanzar(); 
+        int vidasEsperadas = 2;
+        int vidasActuales = heroe.getVidas();
+        assertEquals(vidasEsperadas, vidasActuales);
+    }
+}
